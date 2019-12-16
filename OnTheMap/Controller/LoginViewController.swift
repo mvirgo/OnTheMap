@@ -9,10 +9,20 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController!.setNavigationBarHidden(true, animated: animated)
+        super.viewWillAppear(animated)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController!.setNavigationBarHidden(false, animated: animated)
+        super.viewWillDisappear(animated)
     }
 
     // TODO: Update the below for proper login
