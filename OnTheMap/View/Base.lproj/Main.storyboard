@@ -216,7 +216,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="mh6-S0-glU" detailTextLabel="TNR-5R-Yfp" imageView="BqW-RO-cBc" style="IBUITableViewCellStyleSubtitle" id="2U7-dW-BPO">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="locationCell" textLabel="mh6-S0-glU" detailTextLabel="TNR-5R-Yfp" imageView="BqW-RO-cBc" style="IBUITableViewCellStyleSubtitle" id="2U7-dW-BPO">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2U7-dW-BPO" id="IPZ-LC-ajv">
@@ -275,15 +275,19 @@
         <!--On The Map-->
         <scene sceneID="s3H-wB-o3Y">
             <objects>
-                <tabBarController id="zbG-Nr-InZ" sceneMemberID="viewController">
+                <tabBarController id="zbG-Nr-InZ" customClass="TabBarViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="On The Map" id="bEA-hi-mae">
                         <rightBarButtonItems>
-                            <barButtonItem image="icon_addpin" id="fzS-hQ-fqA">
+                            <barButtonItem title="Add Pin" image="icon_addpin" id="fzS-hQ-fqA">
                                 <connections>
                                     <segue destination="IVT-BQ-Qum" kind="show" id="fQW-JQ-zvS"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="icon_refresh" id="Nb3-ms-mtG"/>
+                            <barButtonItem title="Refresh" image="icon_refresh" id="Nb3-ms-mtG">
+                                <connections>
+                                    <action selector="refreshTapped:" destination="zbG-Nr-InZ" id="20O-hG-zNr"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0lA-D6-EgY">
