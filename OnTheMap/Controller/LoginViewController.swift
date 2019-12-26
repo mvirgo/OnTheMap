@@ -10,6 +10,9 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet weak var emailLabel: UITextField!
+    @IBOutlet weak var passwordLabel: UITextField!
+    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController!.setNavigationBarHidden(true, animated: animated)
         super.viewWillAppear(animated)
@@ -28,7 +31,18 @@ class LoginViewController: UIViewController {
     // TODO: Update the below for proper login
     //       Current set up is just for testing flow and UI
     @IBAction func loginTapped(_ sender: Any) {
+        let username = emailLabel.text ?? ""
+        let password = passwordLabel.text ?? ""
+        APIClient.login(username: username, password: password, completion: handleLoginResponse(success:error:))
         self.performSegue(withIdentifier: "completeLogin", sender: nil)
+    }
+    
+    func handleLoginResponse(success: Bool, error: Error?) {
+        if success {
+            print("Success!")
+        } else {
+            print(error)
+        }
     }
     
 }

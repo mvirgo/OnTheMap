@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A122B0423B55F14009B2E78 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A122B0323B55F14009B2E78 /* APIClient.swift */; };
+		7A122B0823B562D7009B2E78 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A122B0723B562D7009B2E78 /* LoginRequest.swift */; };
+		7A122B0A23B5630A009B2E78 /* SessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A122B0923B5630A009B2E78 /* SessionResponse.swift */; };
 		7A18DBC123A88D3B006251C3 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A18DBC023A88D3B006251C3 /* test.json */; };
 		7A18DBC323A88E63006251C3 /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A18DBC223A88E63006251C3 /* StudentLocation.swift */; };
 		7A18DBC523A8A0B5006251C3 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A18DBC423A8A0B5006251C3 /* TabBarViewController.swift */; };
@@ -21,6 +24,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7A122B0323B55F14009B2E78 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		7A122B0723B562D7009B2E78 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
+		7A122B0923B5630A009B2E78 /* SessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionResponse.swift; sourceTree = "<group>"; };
 		7A18DBC023A88D3B006251C3 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		7A18DBC223A88E63006251C3 /* StudentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
 		7A18DBC423A8A0B5006251C3 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +53,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A122B0223B55ED1009B2E78 /* API Client */ = {
+			isa = PBXGroup;
+			children = (
+				7A122B0323B55F14009B2E78 /* APIClient.swift */,
+			);
+			path = "API Client";
+			sourceTree = "<group>";
+		};
+		7A122B0523B562AF009B2E78 /* API Requests */ = {
+			isa = PBXGroup;
+			children = (
+				7A122B0723B562D7009B2E78 /* LoginRequest.swift */,
+			);
+			path = "API Requests";
+			sourceTree = "<group>";
+		};
+		7A122B0623B562B6009B2E78 /* API Responses */ = {
+			isa = PBXGroup;
+			children = (
+				7A122B0923B5630A009B2E78 /* SessionResponse.swift */,
+			);
+			path = "API Responses";
+			sourceTree = "<group>";
+		};
+		7A122B0B23B56BB5009B2E78 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				7A18DBC223A88E63006251C3 /* StudentLocation.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		7AA7BE6523A6F536009E6906 = {
 			isa = PBXGroup;
 			children = (
@@ -78,7 +116,10 @@
 		7AA7BE8923A6F948009E6906 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7A18DBC223A88E63006251C3 /* StudentLocation.swift */,
+				7A122B0B23B56BB5009B2E78 /* Data */,
+				7A122B0623B562B6009B2E78 /* API Responses */,
+				7A122B0523B562AF009B2E78 /* API Requests */,
+				7A122B0223B55ED1009B2E78 /* API Client */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -178,9 +219,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A122B0823B562D7009B2E78 /* LoginRequest.swift in Sources */,
+				7A122B0A23B5630A009B2E78 /* SessionResponse.swift in Sources */,
 				7A18DBC323A88E63006251C3 /* StudentLocation.swift in Sources */,
 				7AA7BE7423A6F537009E6906 /* LoginViewController.swift in Sources */,
 				7AA7BE8423A6F78C009E6906 /* MapViewController.swift in Sources */,
+				7A122B0423B55F14009B2E78 /* APIClient.swift in Sources */,
 				7AA7BE7223A6F536009E6906 /* AppDelegate.swift in Sources */,
 				7A18DBC523A8A0B5006251C3 /* TabBarViewController.swift in Sources */,
 				7AA7BE8823A6F806009E6906 /* PostInfoViewController.swift in Sources */,

@@ -50,7 +50,7 @@
                                         <rect key="frame" x="0.0" y="50" width="255" height="40"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tJH-4C-6RV">
                                         <rect key="frame" x="0.0" y="100" width="255" height="40"/>
@@ -107,6 +107,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="6ZD-cg-L88"/>
                     <connections>
+                        <outlet property="emailLabel" destination="2W8-Ti-cyi" id="CtY-au-dLy"/>
+                        <outlet property="passwordLabel" destination="Iwx-eS-Hky" id="fqC-GM-7LP"/>
                         <segue destination="zbG-Nr-InZ" kind="show" identifier="completeLogin" id="l1t-6E-0MU"/>
                     </connections>
                 </viewController>
