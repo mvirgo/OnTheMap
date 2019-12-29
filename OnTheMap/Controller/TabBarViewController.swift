@@ -19,11 +19,18 @@ class TabBarViewController: UITabBarController {
         self.navigationItem.hidesBackButton = true
         let logout = UIBarButtonItem(title: "LOGOUT", style: .done, target: self, action: #selector(logoutTapped))
         self.navigationItem.leftBarButtonItem = logout
+        
+        // TESTING: Student locations GET request
+        APIClient.getStudentLocations(completion: handleStudentData(success:error:))
     }
     
     // Return to the login view
     @objc func logoutTapped(_ sender: Any) {
         APIClient.logout(completion: handleLogoutResponse(success:error:))
+    }
+    
+    func handleStudentData(success: Bool, error: Error?) {
+        print("Tested GET of Student Data.")
     }
     
     func handleLogoutResponse(success: Bool, error: Error?) {

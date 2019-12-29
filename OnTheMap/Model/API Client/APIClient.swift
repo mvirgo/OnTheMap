@@ -18,11 +18,13 @@ class APIClient {
     enum Endpoints {
         static let base = "https://onthemap-api.udacity.com/v1"
         
+        case locations
         case session
         case webAuth
         
         var stringValue: String {
             switch self {
+            case .locations: return Endpoints.base + "/StudentLocation?limit=100"
             case .session: return Endpoints.base + "/session"
             case .webAuth: return "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com/authenticated"
             }
@@ -40,8 +42,8 @@ class APIClient {
     }
     
     // Handle responses or errors for any request type
-    class func handleResponseOrError<ResponseType: Decodable>(_ data: Data?, _ response: URLResponse?, _ error: Error?, _ completion: @escaping (ResponseType?, Error?) -> Void) {
-        guard let data = data else {
+    class func handleResponseOrError<ResponseType: Decodable>(_ data: Data?, _ response: URLResponse?, _ error: Error?, _ server: String, _ completion: @escaping (ResponseType?, Error?) -> Void) {
+        guard var data = data else {
             DispatchQueue.main.async {
                 completion(nil, error)
             }
@@ -49,17 +51,19 @@ class APIClient {
         }
         
         let decoder = JSONDecoder()
-        // Subset the response data to throw out first 5 characters
-        let newData = parseData(data)
+        // Subset the response data to throw out first 5 characters if Udacity Accounts API
+        if server == "udacity" {
+            data = parseData(data)
+        }
         
         do {
-            let responseObject = try decoder.decode(ResponseType.self, from: newData)
+            let responseObject = try decoder.decode(ResponseType.self, from: data)
             DispatchQueue.main.async {
                 completion(responseObject, nil)
             }
         } catch {
             do {
-                let errorResponse = try decoder.decode(ErrorResponse.self, from: newData)
+                let errorResponse = try decoder.decode(ErrorResponse.self, from: data)
                 DispatchQueue.main.async {
                     completion(nil, errorResponse)
                 }
@@ -71,6 +75,14 @@ class APIClient {
         }
     }
     
+    // Send GET Requests
+    class func taskForGETRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            handleResponseOrError(data, response, error, "", completion)
+        }
+        task.resume()
+    }
+    
     // Send POST Requests
     class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void) {
         var request = URLRequest(url: url)
@@ -79,7 +91,7 @@ class APIClient {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try! JSONEncoder().encode(body)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            handleResponseOrError(data, response, error, completion)
+            handleResponseOrError(data, response, error, "udacity", completion)
         }
         task.resume()
     }
@@ -97,7 +109,7 @@ class APIClient {
             request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
         }
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            handleResponseOrError(data, response, error, completion)
+            handleResponseOrError(data, response, error, "udacity", completion)
         }
         task.resume()
     }
@@ -119,6 +131,18 @@ class APIClient {
                 Auth.sessionId = ""
                 completion(true, nil)
             } else {
+                completion(false, error)
+            }
+        }
+    }
+    
+    class func getStudentLocations(completion: @escaping (Bool, Error?) -> Void) {
+        taskForGETRequest(url: Endpoints.locations.url, responseType: Locations.self) { response, error in
+            if let response = response {
+                print("Successful GET.")
+                completion(true, nil)
+            } else {
+                print("Failed GET.")
                 completion(false, error)
             }
         }
