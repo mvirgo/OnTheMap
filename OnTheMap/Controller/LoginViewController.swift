@@ -28,12 +28,14 @@ class LoginViewController: UIViewController {
         super.viewWillDisappear(animated)
     }
 
-    // TODO: Update the below for proper login
-    //       Current set up is just for testing flow and UI
+    // Login using the input username and password
     @IBAction func loginTapped(_ sender: Any) {
         let username = emailLabel.text ?? ""
         let password = passwordLabel.text ?? ""
         APIClient.login(username: username, password: password, completion: handleLoginResponse(success:error:))
+    }
+    @IBAction func loginViaWebsiteTapped(_ sender: Any) {
+        UIApplication.shared.open(APIClient.Endpoints.webAuth.url, options: [:], completionHandler: nil)
     }
     
     func handleLoginResponse(success: Bool, error: Error?) {

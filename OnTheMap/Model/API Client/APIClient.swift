@@ -19,10 +19,12 @@ class APIClient {
         static let base = "https://onthemap-api.udacity.com/v1"
         
         case login
+        case webAuth
         
         var stringValue: String {
             switch self {
             case .login: return Endpoints.base + "/session"
+            case .webAuth: return "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com/authenticated"
             }
         }
         
