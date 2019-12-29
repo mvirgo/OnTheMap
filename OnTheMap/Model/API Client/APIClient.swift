@@ -39,6 +39,39 @@ class APIClient {
         return data.subdata(in: range)
     }
     
+    // Handle responses or errors for any request type
+    class func handleResponseOrError<ResponseType: Decodable>(_ data: Data?, _ response: URLResponse?, _ error: Error?, _ completion: @escaping (ResponseType?, Error?) -> Void) {
+        guard let data = data else {
+            DispatchQueue.main.async {
+                completion(nil, error)
+            }
+            return
+        }
+        
+        let decoder = JSONDecoder()
+        // Subset the response data to throw out first 5 characters
+        let newData = parseData(data)
+        
+        do {
+            let responseObject = try decoder.decode(ResponseType.self, from: newData)
+            DispatchQueue.main.async {
+                completion(responseObject, nil)
+            }
+        } catch {
+            do {
+                let errorResponse = try decoder.decode(ErrorResponse.self, from: newData)
+                DispatchQueue.main.async {
+                    completion(nil, errorResponse)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+            }
+        }
+    }
+    
+    // Send POST Requests
     class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void) {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -46,34 +79,7 @@ class APIClient {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try! JSONEncoder().encode(body)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data else {
-                DispatchQueue.main.async {
-                    completion(nil, error)
-                }
-                return
-            }
-
-            let decoder = JSONDecoder()
-            // Subset the response data to throw out first 5 characters
-            let newData = parseData(data)
-
-            do {
-                let responseObject = try decoder.decode(ResponseType.self, from: newData)
-                DispatchQueue.main.async {
-                    completion(responseObject, nil)
-                }
-            } catch {
-                do {
-                    let errorResponse = try decoder.decode(ErrorResponse.self, from: newData)
-                    DispatchQueue.main.async {
-                        completion(nil, errorResponse)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        completion(nil, error)
-                    }
-                }
-            }
+            handleResponseOrError(data, response, error, completion)
         }
         task.resume()
     }
