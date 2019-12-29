@@ -15,6 +15,7 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController!.setNavigationBarHidden(true, animated: animated)
+        passwordLabel.text = "" // Make sure password removed each time
         super.viewWillAppear(animated)
     }
 
