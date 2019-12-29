@@ -34,15 +34,21 @@ class LoginViewController: UIViewController {
         let username = emailLabel.text ?? ""
         let password = passwordLabel.text ?? ""
         APIClient.login(username: username, password: password, completion: handleLoginResponse(success:error:))
-        self.performSegue(withIdentifier: "completeLogin", sender: nil)
     }
     
     func handleLoginResponse(success: Bool, error: Error?) {
         if success {
-            print("Success!")
+            print(APIClient.Auth.sessionId)
+            self.performSegue(withIdentifier: "completeLogin", sender: nil)
         } else {
-            print(error)
+            showLoginFailure(message: error?.localizedDescription ?? "")
         }
+    }
+    
+    func showLoginFailure(message: String) {
+        let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.navigationController?.present(alertVC, animated: true, completion: nil)
     }
     
 }
