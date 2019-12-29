@@ -21,9 +21,17 @@ class TabBarViewController: UITabBarController {
         self.navigationItem.leftBarButtonItem = logout
     }
     
-    // TODO: Add actual logout functionality
     // Return to the login view
     @objc func logoutTapped(_ sender: Any) {
+        APIClient.logout(completion: handleLogoutResponse(success:error:))
+    }
+    
+    func handleLogoutResponse(success: Bool, error: Error?) {
+        if success {
+            print("Logout successful.")
+        } else {
+            print("Logout failed.")
+        }
         self.navigationController!.popToRootViewController(animated: true)
     }
 }

@@ -84,10 +84,39 @@ class APIClient {
         task.resume()
     }
     
+    // Send DELETE Requests
+    class func taskForDELETERequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            handleResponseOrError(data, response, error, completion)
+        }
+        task.resume()
+    }
+    
     class func login(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
         taskForPOSTRequest(url: Endpoints.session.url, responseType: SessionResponse.self, body: LoginRequest(udacity: Udacity(username: username, password: password))) { response, error in
             if let response = response {
                 Auth.sessionId = response.session.id
+                completion(true, nil)
+            } else {
+                completion(false, error)
+            }
+        }
+    }
+    
+    class func logout(completion: @escaping (Bool, Error?) -> Void) {
+        taskForDELETERequest(url: Endpoints.session.url, responseType: LogoutResponse.self) { response, error in
+            if let _ = response {
+                Auth.sessionId = ""
                 completion(true, nil)
             } else {
                 completion(false, error)
