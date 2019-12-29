@@ -13,6 +13,7 @@
 		7A18DBC123A88D3B006251C3 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A18DBC023A88D3B006251C3 /* test.json */; };
 		7A18DBC323A88E63006251C3 /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A18DBC223A88E63006251C3 /* StudentLocation.swift */; };
 		7A18DBC523A8A0B5006251C3 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A18DBC423A8A0B5006251C3 /* TabBarViewController.swift */; };
+		7A2D9EEB23B8428700CF4CD7 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2D9EEA23B8428700CF4CD7 /* ErrorResponse.swift */; };
 		7AA7BE7223A6F536009E6906 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7BE7123A6F536009E6906 /* AppDelegate.swift */; };
 		7AA7BE7423A6F537009E6906 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7BE7323A6F537009E6906 /* LoginViewController.swift */; };
 		7AA7BE7723A6F537009E6906 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AA7BE7523A6F537009E6906 /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 		7A18DBC023A88D3B006251C3 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		7A18DBC223A88E63006251C3 /* StudentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
 		7A18DBC423A8A0B5006251C3 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		7A2D9EEA23B8428700CF4CD7 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		7AA7BE6E23A6F536009E6906 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA7BE7123A6F536009E6906 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AA7BE7323A6F537009E6906 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				7A122B0923B5630A009B2E78 /* SessionResponse.swift */,
+				7A2D9EEA23B8428700CF4CD7 /* ErrorResponse.swift */,
 			);
 			path = "API Responses";
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 				7A122B0423B55F14009B2E78 /* APIClient.swift in Sources */,
 				7AA7BE7223A6F536009E6906 /* AppDelegate.swift in Sources */,
 				7A18DBC523A8A0B5006251C3 /* TabBarViewController.swift in Sources */,
+				7A2D9EEB23B8428700CF4CD7 /* ErrorResponse.swift in Sources */,
 				7AA7BE8823A6F806009E6906 /* PostInfoViewController.swift in Sources */,
 				7AA7BE8623A6F7D5009E6906 /* TableViewController.swift in Sources */,
 			);
