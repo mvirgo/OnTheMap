@@ -18,12 +18,12 @@ class APIClient {
     enum Endpoints {
         static let base = "https://onthemap-api.udacity.com/v1"
         
-        case login
+        case session
         case webAuth
         
         var stringValue: String {
             switch self {
-            case .login: return Endpoints.base + "/session"
+            case .session: return Endpoints.base + "/session"
             case .webAuth: return "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com/authenticated"
             }
         }
@@ -31,6 +31,12 @@ class APIClient {
         var url: URL {
             return URL(string: stringValue)!
         }
+    }
+    
+    // Udacity On the Map API needs to throw out first 5 characters
+    class func parseData(_ data: Data) -> Data {
+        let range = 5..<data.count
+        return data.subdata(in: range)
     }
     
     class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void) {
@@ -42,7 +48,6 @@ class APIClient {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
                 DispatchQueue.main.async {
-                    print("No data.")
                     completion(nil, error)
                 }
                 return
@@ -50,8 +55,7 @@ class APIClient {
 
             let decoder = JSONDecoder()
             // Subset the response data to throw out first 5 characters
-            let range = 5..<data.count
-            let newData = data.subdata(in: range)
+            let newData = parseData(data)
 
             do {
                 let responseObject = try decoder.decode(ResponseType.self, from: newData)
@@ -75,7 +79,7 @@ class APIClient {
     }
     
     class func login(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
-        taskForPOSTRequest(url: Endpoints.login.url, responseType: SessionResponse.self, body: LoginRequest(udacity: Udacity(username: username, password: password))) { response, error in
+        taskForPOSTRequest(url: Endpoints.session.url, responseType: SessionResponse.self, body: LoginRequest(udacity: Udacity(username: username, password: password))) { response, error in
             if let response = response {
                 Auth.sessionId = response.session.id
                 completion(true, nil)
