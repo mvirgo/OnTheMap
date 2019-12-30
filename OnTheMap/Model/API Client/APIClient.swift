@@ -42,7 +42,7 @@ class APIClient {
     }
     
     // Handle responses or errors for any request type
-    class func handleResponseOrError<ResponseType: Decodable>(_ data: Data?, _ response: URLResponse?, _ error: Error?, _ server: String, _ completion: @escaping (ResponseType?, Error?) -> Void) {
+    class func handleResponseOrError<ResponseType: Decodable>(_ data: Data?, _ response: URLResponse?, _ error: Error?, _ parseFront: Bool, _ completion: @escaping (ResponseType?, Error?) -> Void) {
         guard var data = data else {
             DispatchQueue.main.async {
                 completion(nil, error)
@@ -52,7 +52,7 @@ class APIClient {
         
         let decoder = JSONDecoder()
         // Subset the response data to throw out first 5 characters if Udacity Accounts API
-        if server == "udacity" {
+        if parseFront {
             data = parseData(data)
         }
         
@@ -76,28 +76,28 @@ class APIClient {
     }
     
     // Send GET Requests
-    class func taskForGETRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
+    class func taskForGETRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, parseFront: Bool, completion: @escaping (ResponseType?, Error?) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            handleResponseOrError(data, response, error, "", completion)
+            handleResponseOrError(data, response, error, parseFront, completion)
         }
         task.resume()
     }
     
     // Send POST Requests
-    class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void) {
+    class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType, parseFront: Bool, completion: @escaping (ResponseType?, Error?) -> Void) {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try! JSONEncoder().encode(body)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            handleResponseOrError(data, response, error, "udacity", completion)
+            handleResponseOrError(data, response, error, parseFront, completion)
         }
         task.resume()
     }
     
     // Send DELETE Requests
-    class func taskForDELETERequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
+    class func taskForDELETERequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, parseFront: Bool, completion: @escaping (ResponseType?, Error?) -> Void) {
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         var xsrfCookie: HTTPCookie? = nil
@@ -109,13 +109,13 @@ class APIClient {
             request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
         }
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            handleResponseOrError(data, response, error, "udacity", completion)
+            handleResponseOrError(data, response, error, parseFront, completion)
         }
         task.resume()
     }
     
     class func login(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
-        taskForPOSTRequest(url: Endpoints.session.url, responseType: SessionResponse.self, body: LoginRequest(udacity: Udacity(username: username, password: password))) { response, error in
+        taskForPOSTRequest(url: Endpoints.session.url, responseType: SessionResponse.self, body: LoginRequest(udacity: Udacity(username: username, password: password)), parseFront: true) { response, error in
             if let response = response {
                 Auth.sessionId = response.session.id
                 completion(true, nil)
@@ -126,7 +126,7 @@ class APIClient {
     }
     
     class func logout(completion: @escaping (Bool, Error?) -> Void) {
-        taskForDELETERequest(url: Endpoints.session.url, responseType: LogoutResponse.self) { response, error in
+        taskForDELETERequest(url: Endpoints.session.url, responseType: LogoutResponse.self, parseFront: true) { response, error in
             if let _ = response {
                 Auth.sessionId = ""
                 completion(true, nil)
@@ -137,7 +137,7 @@ class APIClient {
     }
     
     class func getStudentLocations(completion: @escaping (Bool, Error?) -> Void) {
-        taskForGETRequest(url: Endpoints.locations.url, responseType: Locations.self) { response, error in
+        taskForGETRequest(url: Endpoints.locations.url, responseType: Locations.self, parseFront: false) { response, error in
             if let response = response {
                 print("Successful GET.")
                 completion(true, nil)
