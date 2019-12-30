@@ -136,14 +136,12 @@ class APIClient {
         }
     }
     
-    class func getStudentLocations(completion: @escaping (Bool, Error?) -> Void) {
+    class func getStudentLocations(completion: @escaping ([StudentLocation], Error?) -> Void) {
         taskForGETRequest(url: Endpoints.locations.url, responseType: Locations.self, parseFront: false) { response, error in
             if let response = response {
-                print("Successful GET.")
-                completion(true, nil)
+                completion(response.results, nil)
             } else {
-                print("Failed GET.")
-                completion(false, error)
+                completion([], error)
             }
         }
     }

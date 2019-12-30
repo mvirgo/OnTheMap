@@ -11,6 +11,7 @@ import UIKit
 class TabBarViewController: UITabBarController {
     
     @IBAction func refreshTapped(_ sender: Any) {
+        APIClient.getStudentLocations(completion: handleStudentData(response:error:))
         print("Refreshed!")
     }
     
@@ -20,8 +21,8 @@ class TabBarViewController: UITabBarController {
         let logout = UIBarButtonItem(title: "LOGOUT", style: .done, target: self, action: #selector(logoutTapped))
         self.navigationItem.leftBarButtonItem = logout
         
-        // TESTING: Student locations GET request
-        APIClient.getStudentLocations(completion: handleStudentData(success:error:))
+        // Get Student Location data to display
+        APIClient.getStudentLocations(completion: handleStudentData(response:error:))
     }
     
     // Return to the login view
@@ -29,8 +30,13 @@ class TabBarViewController: UITabBarController {
         APIClient.logout(completion: handleLogoutResponse(success:error:))
     }
     
-    func handleStudentData(success: Bool, error: Error?) {
-        print("Tested GET of Student Data.")
+    func handleStudentData(response: [StudentLocation], error: Error?) {
+        if let error = error {
+            print(error)
+        } else {
+            print("Successfully gathered student location data.")
+            LocationModel.locations = response
+        }
     }
     
     func handleLogoutResponse(success: Bool, error: Error?) {
