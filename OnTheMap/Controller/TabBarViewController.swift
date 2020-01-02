@@ -23,6 +23,8 @@ class TabBarViewController: UITabBarController {
         
         // Get Student Location data to display
         APIClient.getStudentLocations(completion: handleStudentData(response:error:))
+        
+        super.viewWillAppear(animated)
     }
     
     // Return to the login view
@@ -36,6 +38,8 @@ class TabBarViewController: UITabBarController {
         } else {
             print("Successfully gathered student location data.")
             LocationModel.locations = response
+            // Make sure map view loads pin at start
+            self.children.first?.viewWillAppear(true)
         }
     }
     

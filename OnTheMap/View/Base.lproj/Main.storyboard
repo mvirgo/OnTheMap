@@ -263,14 +263,28 @@
                     <view key="view" contentMode="scaleToFill" id="HLI-mX-R8e">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Nkx-Fj-2LN">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Nkx-Fj-2LN" firstAttribute="centerX" secondItem="e28-Sk-kyS" secondAttribute="centerX" id="Cpk-y0-5r3"/>
+                            <constraint firstItem="Nkx-Fj-2LN" firstAttribute="centerY" secondItem="e28-Sk-kyS" secondAttribute="centerY" id="FNO-KG-1JL"/>
+                            <constraint firstItem="Nkx-Fj-2LN" firstAttribute="top" secondItem="e28-Sk-kyS" secondAttribute="top" id="JXB-HC-lvW"/>
+                            <constraint firstItem="Nkx-Fj-2LN" firstAttribute="leading" secondItem="HLI-mX-R8e" secondAttribute="leading" id="Y6e-ot-kPg"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="e28-Sk-kyS"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="icon_mapview-selected" landscapeImage="icon_mapview-selected" id="6ob-mM-8Ux"/>
+                    <connections>
+                        <outlet property="mapView" destination="Nkx-Fj-2LN" id="9iY-iV-pnx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VMe-yc-MMU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1894" y="-533"/>
+            <point key="canvasLocation" x="1893.5999999999999" y="-533.88305847076469"/>
         </scene>
         <!--On The Map-->
         <scene sceneID="s3H-wB-o3Y">
