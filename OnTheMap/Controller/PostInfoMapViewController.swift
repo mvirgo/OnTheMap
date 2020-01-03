@@ -47,4 +47,12 @@ class PostInfoMapViewController: UIViewController, MKMapViewDelegate {
         
         return pinView
     }
+    
+    // TODO: Fully implement posting user info; below just for flow testing
+    @IBAction func finishTapped(_ sender: Any) {
+        print("Finish posting location tapped.")
+        // Pop back to the Tab Bar View Controller (3 above)
+        let vCs = self.navigationController!.viewControllers
+        self.navigationController!.popToViewController(vCs[vCs.count - 3], animated: true)
+    }
 }

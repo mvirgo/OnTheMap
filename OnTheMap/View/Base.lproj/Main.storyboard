@@ -205,13 +205,30 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Eh0-Gt-X8L">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5lp-lL-IlO">
+                                <rect key="frame" x="30" y="597" width="315" height="40"/>
+                                <color key="backgroundColor" red="0.0078431372550000003" green="0.70196078429999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Yrf-SV-Ldf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <state key="normal" title="FINISH">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="finishTapped:" destination="tRr-h0-2cr" eventType="touchUpInside" id="ooE-DV-cnN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Eh0-Gt-X8L" firstAttribute="centerX" secondItem="FvK-n0-EcM" secondAttribute="centerX" id="0Oa-wg-Rkg"/>
                             <constraint firstItem="Eh0-Gt-X8L" firstAttribute="leading" secondItem="bd9-zk-89V" secondAttribute="leading" id="6Dt-R3-sc7"/>
+                            <constraint firstItem="FvK-n0-EcM" firstAttribute="trailing" secondItem="5lp-lL-IlO" secondAttribute="trailing" constant="30" id="N5U-qi-7qH"/>
                             <constraint firstItem="Eh0-Gt-X8L" firstAttribute="centerY" secondItem="FvK-n0-EcM" secondAttribute="centerY" id="RtT-5j-egy"/>
                             <constraint firstItem="Eh0-Gt-X8L" firstAttribute="top" secondItem="FvK-n0-EcM" secondAttribute="top" id="ifn-7c-D07"/>
+                            <constraint firstItem="5lp-lL-IlO" firstAttribute="centerX" secondItem="FvK-n0-EcM" secondAttribute="centerX" id="lpB-8M-ls8"/>
+                            <constraint firstItem="FvK-n0-EcM" firstAttribute="bottom" secondItem="5lp-lL-IlO" secondAttribute="bottom" constant="30" id="md9-ZW-90M"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FvK-n0-EcM"/>
                     </view>
