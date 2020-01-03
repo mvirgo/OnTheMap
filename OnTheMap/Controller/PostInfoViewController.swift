@@ -14,13 +14,14 @@ class PostInfoViewController: UIViewController {
     @IBOutlet weak var locationLabel: UITextField!
     @IBOutlet weak var profileLabel: UITextField!
     
+    var foundLocation: CLLocationCoordinate2D?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
     // If Find Location button tapped, check the location and URL
-    // TODO: Send info to the individual map view if valid
     @IBAction func findLocationTapped(_ sender: Any) {
         var valid_inputs = true
         // Check the location
@@ -28,8 +29,7 @@ class PostInfoViewController: UIViewController {
         geocoder.geocodeAddressString(locationLabel.text!) { (placemarks, error) in
             if error == nil {
                 if let placemark = placemarks?[0] {
-                    let location = placemark.location!.coordinate
-                    print(location)
+                    self.foundLocation = placemark.location!.coordinate
                 }
                 // Check the profile url field is not empty
                 if self.profileLabel.text == "" {
@@ -42,7 +42,16 @@ class PostInfoViewController: UIViewController {
             }
             // Only segue if both inputs are valid
             if valid_inputs {
-                self.performSegue(withIdentifier: "findLocation", sender: nil)
+                // Get the Post Info Map controller
+                let mapController = self.storyboard!.instantiateViewController(withIdentifier: "postInfoMap") as! PostInfoMapViewController
+                
+                // Load the current meme into the Meme Editor
+                mapController.locationText = self.locationLabel.text
+                mapController.profileURL = self.profileLabel.text
+                mapController.coordinates = self.foundLocation
+                
+                // Present the view controller using navigation
+                self.navigationController!.pushViewController(mapController, animated: true)
             }
         }
     }

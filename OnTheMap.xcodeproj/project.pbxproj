@@ -23,6 +23,7 @@
 		7AA7BE8423A6F78C009E6906 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7BE8323A6F78C009E6906 /* MapViewController.swift */; };
 		7AA7BE8623A6F7D5009E6906 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7BE8523A6F7D5009E6906 /* TableViewController.swift */; };
 		7AA7BE8823A6F806009E6906 /* PostInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7BE8723A6F806009E6906 /* PostInfoViewController.swift */; };
+		7ABFA9B223BED7CD00B2E469 /* PostInfoMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFA9B123BED7CD00B2E469 /* PostInfoMapViewController.swift */; };
 		7AC1085923B939EF0025D8C8 /* Locations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC1085823B939EF0025D8C8 /* Locations.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		7AA7BE8323A6F78C009E6906 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		7AA7BE8523A6F7D5009E6906 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		7AA7BE8723A6F806009E6906 /* PostInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInfoViewController.swift; sourceTree = "<group>"; };
+		7ABFA9B123BED7CD00B2E469 /* PostInfoMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInfoMapViewController.swift; sourceTree = "<group>"; };
 		7AC1085823B939EF0025D8C8 /* Locations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locations.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -152,6 +154,7 @@
 				7AA7BE8523A6F7D5009E6906 /* TableViewController.swift */,
 				7AA7BE8323A6F78C009E6906 /* MapViewController.swift */,
 				7A18DBC423A8A0B5006251C3 /* TabBarViewController.swift */,
+				7ABFA9B123BED7CD00B2E469 /* PostInfoMapViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 				7A18DBC523A8A0B5006251C3 /* TabBarViewController.swift in Sources */,
 				7A2D9EEB23B8428700CF4CD7 /* ErrorResponse.swift in Sources */,
 				7AA7BE8823A6F806009E6906 /* PostInfoViewController.swift in Sources */,
+				7ABFA9B223BED7CD00B2E469 /* PostInfoMapViewController.swift in Sources */,
 				7A44F88923BA78AA000214E6 /* LocationModel.swift in Sources */,
 				7AA7BE8623A6F7D5009E6906 /* TableViewController.swift in Sources */,
 			);

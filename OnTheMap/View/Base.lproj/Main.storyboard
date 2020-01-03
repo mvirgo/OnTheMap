@@ -197,7 +197,7 @@
         <!--Add Location-->
         <scene sceneID="zMx-nE-wXz">
             <objects>
-                <viewController id="tRr-h0-2cr" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="postInfoMap" id="tRr-h0-2cr" customClass="PostInfoMapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bd9-zk-89V">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -216,6 +216,9 @@
                         <viewLayoutGuide key="safeArea" id="FvK-n0-EcM"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add Location" id="dqs-5b-hu6"/>
+                    <connections>
+                        <outlet property="mapView" destination="Eh0-Gt-X8L" id="Frt-yS-vTP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z4a-y4-R68" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
