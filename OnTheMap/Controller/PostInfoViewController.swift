@@ -34,11 +34,11 @@ class PostInfoViewController: UIViewController {
                 // Check the profile url field is not empty
                 if self.profileLabel.text == "" {
                     valid_inputs = false
-                    print("Profile URL cannot be empty.")
+                    self.alertUser(title: "Invalid Link", message: "Profile Link cannot be empty.")
                 }
             } else {
                 valid_inputs = false
-                print("Invalid location.")
+                self.alertUser(title: "Invalid Location", message: "Provided location invalid or unable to be found.")
             }
             // Only segue if both inputs are valid
             if valid_inputs {
@@ -50,5 +50,11 @@ class PostInfoViewController: UIViewController {
     // Return to the tabbed view
     @IBAction func goBack(_ sender: Any) {
         self.navigationController!.popViewController(animated: true)
+    }
+    
+    func alertUser(title: String, message: String) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.navigationController?.present(alertVC, animated: true, completion: nil)
     }
 }
