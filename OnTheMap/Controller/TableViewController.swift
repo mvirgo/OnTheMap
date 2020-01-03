@@ -24,4 +24,15 @@ class TableViewController: UITableViewController {
         
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let location = LocationModel.locations[(indexPath as NSIndexPath).row]
+        if let url = URL(string: location.mediaURL) {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            } else {
+                print("Invalid URL.")
+            }
+        }
+    }
 }
