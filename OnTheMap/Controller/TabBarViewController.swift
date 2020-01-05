@@ -12,6 +12,10 @@ class TabBarViewController: UITabBarController {
     
     @IBAction func refreshTapped(_ sender: Any) {
         APIClient.getStudentLocations(completion: handleStudentData(response:error:))
+        // Have to "force" refresh of table view, this will send back onto map
+        //  view with table views viewWillAppear correctly refreshing it
+        let x = self.viewControllers?.popLast()
+        self.viewControllers?.append(x!)
         print("Refreshed!")
     }
     
@@ -36,7 +40,6 @@ class TabBarViewController: UITabBarController {
         if let error = error {
             print(error)
         } else {
-            print("Successfully gathered student location data.")
             LocationModel.locations = response
             // Make sure map view loads pin at start
             self.children.first?.viewWillAppear(true)
