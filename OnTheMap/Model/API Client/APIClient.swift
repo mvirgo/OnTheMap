@@ -13,6 +13,8 @@ class APIClient {
     struct Auth {
         static var accountKey = ""
         static var sessionId = ""
+        static var firstName = ""
+        static var lastName = ""
     }
     
     enum Endpoints {
@@ -134,8 +136,11 @@ class APIClient {
     class func logout(completion: @escaping (Bool, Error?) -> Void) {
         taskForDELETERequest(url: Endpoints.session.url, responseType: LogoutResponse.self, parseFront: true) { response, error in
             if let _ = response {
+                // Clear all Auth and user data
                 Auth.sessionId = ""
                 Auth.accountKey = ""
+                Auth.firstName = ""
+                Auth.lastName = ""
                 completion(true, nil)
             } else {
                 completion(false, error)
@@ -149,6 +154,18 @@ class APIClient {
                 completion(response.results, nil)
             } else {
                 completion([], error)
+            }
+        }
+    }
+    
+    class func getUserData(completion: @escaping (Bool, Error?) -> Void) {
+        taskForGETRequest(url: Endpoints.userData.url, responseType: UserData.self, parseFront: true) { response, error in
+            if let response = response {
+                Auth.firstName = response.firstName
+                Auth.lastName = response.lastName
+                completion(true, nil)
+            } else {
+                completion(false, error)
             }
         }
     }

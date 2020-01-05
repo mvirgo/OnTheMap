@@ -48,11 +48,22 @@ class PostInfoMapViewController: UIViewController, MKMapViewDelegate {
         return pinView
     }
     
-    // TODO: Fully implement posting user info; below just for flow testing
+    // TODO: Fully implement posting user info
     @IBAction func finishTapped(_ sender: Any) {
         print("Finish posting location tapped.")
+        // Get user's first name and last name, and post if successful
+        APIClient.getUserData(completion: handleUserData(success:error:))
         // Pop back to the Tab Bar View Controller (3 above)
         let vCs = self.navigationController!.viewControllers
         self.navigationController!.popToViewController(vCs[vCs.count - 3], animated: true)
+    }
+    
+    // TODO: FUlly implement posting user info following success
+    func handleUserData(success: Bool, error: Error?) {
+        if success {
+            print("Got user data.")
+        } else {
+            print(error)
+        }
     }
 }
