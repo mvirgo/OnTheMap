@@ -50,7 +50,6 @@ class PostInfoMapViewController: UIViewController, MKMapViewDelegate {
     
     // TODO: Fully implement posting user info
     @IBAction func finishTapped(_ sender: Any) {
-        print("Finish posting location tapped.")
         // Get user's first name and last name, and post if successful
         APIClient.getUserData(completion: handleUserData(success:error:))
         // Pop back to the Tab Bar View Controller (3 above)
@@ -58,10 +57,19 @@ class PostInfoMapViewController: UIViewController, MKMapViewDelegate {
         self.navigationController!.popToViewController(vCs[vCs.count - 3], animated: true)
     }
     
-    // TODO: FUlly implement posting user info following success
+    // Check if successfully gathered user data and post location, if so
     func handleUserData(success: Bool, error: Error?) {
         if success {
-            print("Got user data.")
+            APIClient.postLocation(mapString: locationText!, profile: profileURL!, latitude: Float(coordinates!.latitude), longitude: Float(coordinates!.longitude), completion: handlePostingLocation(success:error:))
+        } else {
+            print(error)
+        }
+    }
+    
+    // Check whether successful at posting user information
+    func handlePostingLocation(success: Bool, error: Error?) {
+        if success {
+            print("Successfully posted location.")
         } else {
             print(error)
         }

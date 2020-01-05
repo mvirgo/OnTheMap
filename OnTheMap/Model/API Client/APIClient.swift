@@ -169,4 +169,15 @@ class APIClient {
             }
         }
     }
+    
+    class func postLocation(mapString: String, profile: String, latitude: Float, longitude: Float, completion: @escaping (Bool, Error?) -> Void) {
+        let body = PostLocation(uniqueKey: Auth.accountKey, firstName: Auth.firstName, lastName: Auth.lastName, mapString: mapString, mediaURL: profile, latitude: latitude, longitude: longitude)
+        taskForPOSTRequest(url: Endpoints.postLocation.url, responseType: PostLocationResponse.self, body: body, parseFront: false) { response, error in
+            if let _ = response {
+                completion(true, nil)
+            } else {
+                completion(false, error)
+            }
+        }
+    }
 }

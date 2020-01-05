@@ -16,6 +16,8 @@
 		7A2D9EED23B862EE00CF4CD7 /* LogoutResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2D9EEC23B862EE00CF4CD7 /* LogoutResponse.swift */; };
 		7A44F88923BA78AA000214E6 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A44F88823BA78AA000214E6 /* LocationModel.swift */; };
 		7A9CC97823C185D500068C3A /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9CC97723C185D500068C3A /* UserData.swift */; };
+		7A9CC97A23C18EE600068C3A /* PostLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9CC97923C18EE600068C3A /* PostLocation.swift */; };
+		7A9CC97C23C18F5000068C3A /* PostLocationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9CC97B23C18F5000068C3A /* PostLocationResponse.swift */; };
 		7AA7BE7223A6F536009E6906 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7BE7123A6F536009E6906 /* AppDelegate.swift */; };
 		7AA7BE7423A6F537009E6906 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7BE7323A6F537009E6906 /* LoginViewController.swift */; };
 		7AA7BE7723A6F537009E6906 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AA7BE7523A6F537009E6906 /* Main.storyboard */; };
@@ -38,6 +40,8 @@
 		7A2D9EEC23B862EE00CF4CD7 /* LogoutResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutResponse.swift; sourceTree = "<group>"; };
 		7A44F88823BA78AA000214E6 /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 		7A9CC97723C185D500068C3A /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		7A9CC97923C18EE600068C3A /* PostLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocation.swift; sourceTree = "<group>"; };
+		7A9CC97B23C18F5000068C3A /* PostLocationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocationResponse.swift; sourceTree = "<group>"; };
 		7AA7BE6E23A6F536009E6906 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA7BE7123A6F536009E6906 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AA7BE7323A6F537009E6906 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				7A122B0723B562D7009B2E78 /* LoginRequest.swift */,
+				7A9CC97923C18EE600068C3A /* PostLocation.swift */,
 			);
 			path = "API Requests";
 			sourceTree = "<group>";
@@ -88,6 +93,7 @@
 				7A2D9EEC23B862EE00CF4CD7 /* LogoutResponse.swift */,
 				7AC1085823B939EF0025D8C8 /* Locations.swift */,
 				7A9CC97723C185D500068C3A /* UserData.swift */,
+				7A9CC97B23C18F5000068C3A /* PostLocationResponse.swift */,
 			);
 			path = "API Responses";
 			sourceTree = "<group>";
@@ -233,6 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A9CC97A23C18EE600068C3A /* PostLocation.swift in Sources */,
 				7A2D9EED23B862EE00CF4CD7 /* LogoutResponse.swift in Sources */,
 				7A122B0823B562D7009B2E78 /* LoginRequest.swift in Sources */,
 				7A9CC97823C185D500068C3A /* UserData.swift in Sources */,
@@ -243,6 +250,7 @@
 				7AA7BE8423A6F78C009E6906 /* MapViewController.swift in Sources */,
 				7A122B0423B55F14009B2E78 /* APIClient.swift in Sources */,
 				7AA7BE7223A6F536009E6906 /* AppDelegate.swift in Sources */,
+				7A9CC97C23C18F5000068C3A /* PostLocationResponse.swift in Sources */,
 				7A18DBC523A8A0B5006251C3 /* TabBarViewController.swift in Sources */,
 				7A2D9EEB23B8428700CF4CD7 /* ErrorResponse.swift in Sources */,
 				7AA7BE8823A6F806009E6906 /* PostInfoViewController.swift in Sources */,
