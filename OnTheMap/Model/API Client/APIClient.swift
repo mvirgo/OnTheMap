@@ -17,15 +17,20 @@ class APIClient {
     
     enum Endpoints {
         static let base = "https://onthemap-api.udacity.com/v1"
+        static let locationsBase = "/StudentLocation"
         
-        case locations
+        case getLocations
+        case postLocation
         case session
+        case userData
         case webAuth
         
         var stringValue: String {
             switch self {
-            case .locations: return Endpoints.base + "/StudentLocation?limit=100"
+            case .getLocations: return Endpoints.base + Endpoints.locationsBase + "?limit=100"
+            case .postLocation: return Endpoints.base + Endpoints.locationsBase
             case .session: return Endpoints.base + "/session"
+            case .userData: return Endpoints.base + "/users/\(Auth.accountKey)"
             case .webAuth: return "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com/authenticated"
             }
         }
@@ -137,7 +142,7 @@ class APIClient {
     }
     
     class func getStudentLocations(completion: @escaping ([StudentLocation], Error?) -> Void) {
-        taskForGETRequest(url: Endpoints.locations.url, responseType: Locations.self, parseFront: false) { response, error in
+        taskForGETRequest(url: Endpoints.getLocations.url, responseType: Locations.self, parseFront: false) { response, error in
             if let response = response {
                 completion(response.results, nil)
             } else {
