@@ -128,7 +128,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Dqo-pq-Yfp">
-                                <rect key="frame" x="60" y="295.5" width="255" height="140"/>
+                                <rect key="frame" x="60" y="270.5" width="255" height="190"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yww-rt-YLJ">
                                         <rect key="frame" x="0.0" y="0.0" width="255" height="40"/>
@@ -156,10 +156,13 @@
                                             <action selector="findLocationTapped:" destination="IVT-BQ-Qum" eventType="touchUpInside" id="GTv-84-Nfc"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="kC8-jO-Wab">
+                                        <rect key="frame" x="0.0" y="150" width="255" height="40"/>
+                                    </activityIndicatorView>
                                 </subviews>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_world" translatesAutoresizingMaskIntoConstraints="NO" id="rb8-ZA-HVD">
-                                <rect key="frame" x="152.5" y="185.5" width="70" height="70"/>
+                                <rect key="frame" x="152.5" y="160.5" width="70" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="8XO-W0-rhT"/>
                                     <constraint firstAttribute="width" constant="70" id="mxg-9j-Ghw"/>
@@ -185,6 +188,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="kC8-jO-Wab" id="jkV-rR-WAM"/>
                         <outlet property="locationLabel" destination="Yww-rt-YLJ" id="w3e-ON-Nb7"/>
                         <outlet property="profileLabel" destination="SiO-Ko-xcH" id="Ab0-nA-bSO"/>
                         <segue destination="tRr-h0-2cr" kind="show" identifier="findLocation" id="wNp-dd-9o4"/>

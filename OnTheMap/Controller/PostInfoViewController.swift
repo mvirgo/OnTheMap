@@ -13,6 +13,7 @@ class PostInfoViewController: UIViewController {
     
     @IBOutlet weak var locationLabel: UITextField!
     @IBOutlet weak var profileLabel: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var foundLocation: CLLocationCoordinate2D?
     
@@ -26,6 +27,8 @@ class PostInfoViewController: UIViewController {
         var valid_inputs = true
         // Check the location
         let geocoder = CLGeocoder()
+        // Animate activity indicator and disable text fields
+        setGeocoding(true)
         geocoder.geocodeAddressString(locationLabel.text!) { (placemarks, error) in
             if error == nil {
                 if let placemark = placemarks?[0] {
@@ -40,6 +43,8 @@ class PostInfoViewController: UIViewController {
                 valid_inputs = false
                 self.alertUser(title: "Invalid Location", message: "Provided location invalid or unable to be found.")
             }
+            // Hide activity indicator and enable text fields
+            self.setGeocoding(false)
             // Only segue if both inputs are valid
             if valid_inputs {
                 // Get the Post Info Map controller
@@ -59,6 +64,16 @@ class PostInfoViewController: UIViewController {
     // Return to the tabbed view
     @IBAction func goBack(_ sender: Any) {
         self.navigationController!.popViewController(animated: true)
+    }
+    
+    func setGeocoding(_ geocoding: Bool) {
+        if geocoding {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+        locationLabel.isEnabled = !geocoding
+        profileLabel.isEnabled = !geocoding
     }
     
     func alertUser(title: String, message: String) {
