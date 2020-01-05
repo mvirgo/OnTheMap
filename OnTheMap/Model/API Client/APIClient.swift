@@ -29,7 +29,7 @@ class APIClient {
         
         var stringValue: String {
             switch self {
-            case .getLocations: return Endpoints.base + Endpoints.locationsBase + "?limit=100"
+            case .getLocations: return Endpoints.base + Endpoints.locationsBase + "?order=-updatedAt&limit=100"
             case .postLocation: return Endpoints.base + Endpoints.locationsBase
             case .session: return Endpoints.base + "/session"
             case .userData: return Endpoints.base + "/users/\(Auth.accountKey)"
