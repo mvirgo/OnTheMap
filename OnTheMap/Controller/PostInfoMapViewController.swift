@@ -48,7 +48,7 @@ class PostInfoMapViewController: UIViewController, MKMapViewDelegate {
         return pinView
     }
     
-    // TODO: Fully implement posting user info
+    // Get user data and post location when finished, then go back to Tab Bar View
     @IBAction func finishTapped(_ sender: Any) {
         // Get user's first name and last name, and post if successful
         APIClient.getUserData(completion: handleUserData(success:error:))
@@ -62,7 +62,7 @@ class PostInfoMapViewController: UIViewController, MKMapViewDelegate {
         if success {
             APIClient.postLocation(mapString: locationText!, profile: profileURL!, latitude: Float(coordinates!.latitude), longitude: Float(coordinates!.longitude), completion: handlePostingLocation(success:error:))
         } else {
-            print(error)
+            alertUser(title: "User Not Found", message: "Unable to gather user data from Udacity API.")
         }
     }
     
@@ -71,7 +71,14 @@ class PostInfoMapViewController: UIViewController, MKMapViewDelegate {
         if success {
             print("Successfully posted location.")
         } else {
-            print(error)
+            alertUser(title: "Failed to Post Location", message: "Unable to post your location to the On the Map API.")
         }
+    }
+    
+    // Alert the user if getting data or posting location failed
+    func alertUser(title: String, message: String) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.navigationController?.present(alertVC, animated: true, completion: nil)
     }
 }
