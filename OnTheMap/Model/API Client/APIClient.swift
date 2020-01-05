@@ -123,6 +123,7 @@ class APIClient {
         taskForPOSTRequest(url: Endpoints.session.url, responseType: SessionResponse.self, body: LoginRequest(udacity: Udacity(username: username, password: password)), parseFront: true) { response, error in
             if let response = response {
                 Auth.sessionId = response.session.id
+                Auth.accountKey = response.account.key
                 completion(true, nil)
             } else {
                 completion(false, error)
@@ -134,6 +135,7 @@ class APIClient {
         taskForDELETERequest(url: Endpoints.session.url, responseType: LogoutResponse.self, parseFront: true) { response, error in
             if let _ = response {
                 Auth.sessionId = ""
+                Auth.accountKey = ""
                 completion(true, nil)
             } else {
                 completion(false, error)
