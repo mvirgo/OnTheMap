@@ -37,8 +37,10 @@ class TabBarViewController: UITabBarController {
     }
     
     func handleStudentData(response: [StudentLocation], error: Error?) {
-        if let error = error {
-            print(error)
+        if let _ = error {
+            let alertVC = UIAlertController(title: "Download Failed", message: "Failed to download student information.", preferredStyle: .alert)
+            alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.navigationController?.present(alertVC, animated: true, completion: nil)
         } else {
             LocationModel.locations = response
             // Make sure map view loads pin at start
