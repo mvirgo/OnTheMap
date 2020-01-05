@@ -10,18 +10,15 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    // MARK: IBOutlets
     @IBOutlet weak var emailLabel: UITextField!
     @IBOutlet weak var passwordLabel: UITextField!
     
+    // MARK: View functions
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController!.setNavigationBarHidden(true, animated: animated)
         passwordLabel.text = "" // Make sure password removed each time
         super.viewWillAppear(animated)
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -29,6 +26,8 @@ class LoginViewController: UIViewController {
         super.viewWillDisappear(animated)
     }
 
+    // MARK: IBActions
+    
     // Login using the input username and password
     @IBAction func loginTapped(_ sender: Any) {
         let username = emailLabel.text ?? ""
@@ -39,6 +38,7 @@ class LoginViewController: UIViewController {
         UIApplication.shared.open(APIClient.Endpoints.webAuth.url, options: [:], completionHandler: nil)
     }
     
+    // MARK: Completion handler for login
     func handleLoginResponse(success: Bool, error: Error?) {
         if success {
             print(APIClient.Auth.sessionId)
@@ -48,6 +48,7 @@ class LoginViewController: UIViewController {
         }
     }
     
+    // MARK: Alert View
     func showLoginFailure(message: String) {
         let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

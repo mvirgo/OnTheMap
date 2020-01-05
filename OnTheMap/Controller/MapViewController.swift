@@ -10,8 +10,10 @@ import UIKit
 import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
+    // MARK: IBOutlets
     @IBOutlet weak var mapView: MKMapView!
     
+    // MARK: View functions
     override func viewWillAppear(_ animated: Bool) {
         mapView.delegate = self
         // Create array to hold pin annotations
@@ -42,6 +44,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         super.viewWillAppear(animated)
     }
     
+    // MARK: Map view functions
     // Below function based on Udacity PinSample code - pin style
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         

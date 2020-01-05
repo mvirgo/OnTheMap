@@ -9,7 +9,7 @@
 import UIKit
 
 class TabBarViewController: UITabBarController {
-    
+    // MARK: IBAction
     @IBAction func refreshTapped(_ sender: Any) {
         APIClient.getStudentLocations(completion: handleStudentData(response:error:))
         // Have to "force" refresh of table view, this will send back onto map
@@ -19,6 +19,7 @@ class TabBarViewController: UITabBarController {
         print("Refreshed!")
     }
     
+    // MARK: View function
     override func viewWillAppear(_ animated: Bool) {
         // Change the back button to a LOGOUT button
         self.navigationItem.hidesBackButton = true
@@ -31,11 +32,13 @@ class TabBarViewController: UITabBarController {
         super.viewWillAppear(animated)
     }
     
+    // MARK: Logout button functionnality
     // Return to the login view
     @objc func logoutTapped(_ sender: Any) {
         APIClient.logout(completion: handleLogoutResponse(success:error:))
     }
     
+    // MARK: Completion Handlers
     func handleStudentData(response: [StudentLocation], error: Error?) {
         if let _ = error {
             let alertVC = UIAlertController(title: "Download Failed", message: "Failed to download student information.", preferredStyle: .alert)

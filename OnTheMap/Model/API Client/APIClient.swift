@@ -9,7 +9,7 @@
 import Foundation
 
 class APIClient {
-    
+    // MARK: Struct for authenticationn and user data
     struct Auth {
         static var accountKey = ""
         static var sessionId = ""
@@ -17,6 +17,7 @@ class APIClient {
         static var lastName = ""
     }
     
+    // MARK: API Endpoints
     enum Endpoints {
         static let base = "https://onthemap-api.udacity.com/v1"
         static let locationsBase = "/StudentLocation"
@@ -42,12 +43,14 @@ class APIClient {
         }
     }
     
+    // MARK: Helper function for Udacity API
     // Udacity On the Map API needs to throw out first 5 characters
     class func parseData(_ data: Data) -> Data {
         let range = 5..<data.count
         return data.subdata(in: range)
     }
     
+    // MARK: General JSON response handling
     // Handle responses or errors for any request type
     class func handleResponseOrError<ResponseType: Decodable>(_ data: Data?, _ response: URLResponse?, _ error: Error?, _ parseFront: Bool, _ completion: @escaping (ResponseType?, Error?) -> Void) {
         guard var data = data else {
@@ -82,6 +85,7 @@ class APIClient {
         }
     }
     
+    // MARK: General Request Types
     // Send GET Requests
     class func taskForGETRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, parseFront: Bool, completion: @escaping (ResponseType?, Error?) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
@@ -121,6 +125,7 @@ class APIClient {
         task.resume()
     }
     
+    // MARK: Specific API requests
     class func login(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
         taskForPOSTRequest(url: Endpoints.session.url, responseType: SessionResponse.self, body: LoginRequest(udacity: Udacity(username: username, password: password)), parseFront: true) { response, error in
             if let response = response {
@@ -161,6 +166,7 @@ class APIClient {
     class func getUserData(completion: @escaping (Bool, Error?) -> Void) {
         taskForGETRequest(url: Endpoints.userData.url, responseType: UserData.self, parseFront: true) { response, error in
             if let response = response {
+                // Store first and last name of current user
                 Auth.firstName = response.firstName
                 Auth.lastName = response.lastName
                 completion(true, nil)

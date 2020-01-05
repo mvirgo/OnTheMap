@@ -10,12 +10,15 @@ import UIKit
 import MapKit
 
 class PostInfoMapViewController: UIViewController, MKMapViewDelegate {
+    // MARK: IBOutlet
     @IBOutlet weak var mapView: MKMapView!
     
+    // MARK: Other variables
     var locationText: String?
     var profileURL: String?
     var coordinates: CLLocationCoordinate2D?
     
+    // MARK: View functions
     override func viewWillAppear(_ animated: Bool) {
         mapView.delegate = self
         // Create the annotation
@@ -29,6 +32,7 @@ class PostInfoMapViewController: UIViewController, MKMapViewDelegate {
         super.viewWillAppear(animated)
     }
     
+    // MARK: Map view function
     // Below function based on Udacity PinSample code - pin style
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
@@ -48,6 +52,7 @@ class PostInfoMapViewController: UIViewController, MKMapViewDelegate {
         return pinView
     }
     
+    // MARK: IBAction
     // Get user data and post location when finished, then go back to Tab Bar View
     @IBAction func finishTapped(_ sender: Any) {
         // Get user's first name and last name, and post if successful
@@ -57,6 +62,7 @@ class PostInfoMapViewController: UIViewController, MKMapViewDelegate {
         self.navigationController!.popToViewController(vCs[vCs.count - 3], animated: true)
     }
     
+    // MARK: Completion Handlers
     // Check if successfully gathered user data and post location, if so
     func handleUserData(success: Bool, error: Error?) {
         if success {
@@ -75,6 +81,7 @@ class PostInfoMapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    // MARK: Alert views
     // Alert the user if getting data or posting location failed
     func alertUser(title: String, message: String) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)

@@ -11,17 +11,15 @@ import MapKit
 
 class PostInfoViewController: UIViewController {
     
+    // MARK: IBOutlets
     @IBOutlet weak var locationLabel: UITextField!
     @IBOutlet weak var profileLabel: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    // MARK: Other variables
     var foundLocation: CLLocationCoordinate2D?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    
+    // MARK: IBActions
     // If Find Location button tapped, check the location and URL
     @IBAction func findLocationTapped(_ sender: Any) {
         var valid_inputs = true
@@ -66,6 +64,7 @@ class PostInfoViewController: UIViewController {
         self.navigationController!.popViewController(animated: true)
     }
     
+    // MARK: Activity Indicator functionality
     func setGeocoding(_ geocoding: Bool) {
         if geocoding {
             activityIndicator.startAnimating()
@@ -76,6 +75,7 @@ class PostInfoViewController: UIViewController {
         profileLabel.isEnabled = !geocoding
     }
     
+    // MARK: Alert views
     func alertUser(title: String, message: String) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
