@@ -58,8 +58,9 @@ class PostInfoMapViewController: UIViewController, MKMapViewDelegate {
         // Get user's first name and last name, and post if successful
         APIClient.getUserData(completion: handleUserData(success:error:))
         // Pop back to the Tab Bar View Controller (3 above)
-        let vCs = self.navigationController!.viewControllers
-        self.navigationController!.popToViewController(vCs[vCs.count - 3], animated: true)
+        let viewControllers = self.navigationController!.viewControllers
+        self.navigationController!.popToViewController(
+            viewControllers[viewControllers.count - 3], animated: true)
     }
     
     // MARK: Completion Handlers

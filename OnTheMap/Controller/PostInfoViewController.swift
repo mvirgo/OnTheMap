@@ -22,7 +22,7 @@ class PostInfoViewController: UIViewController {
     // MARK: IBActions
     // If Find Location button tapped, check the location and URL
     @IBAction func findLocationTapped(_ sender: Any) {
-        var valid_inputs = true
+        var validInputs = true
         // Check the location
         let geocoder = CLGeocoder()
         // Animate activity indicator and disable text fields
@@ -34,17 +34,17 @@ class PostInfoViewController: UIViewController {
                 }
                 // Check the profile url field is not empty
                 if self.profileLabel.text == "" {
-                    valid_inputs = false
+                    validInputs = false
                     self.alertUser(title: "Invalid Link", message: "Profile Link cannot be empty.")
                 }
             } else {
-                valid_inputs = false
+                validInputs = false
                 self.alertUser(title: "Invalid Location", message: "Provided location invalid or unable to be found.")
             }
             // Hide activity indicator and enable text fields
             self.setGeocoding(false)
             // Only segue if both inputs are valid
-            if valid_inputs {
+            if validInputs {
                 // Get the Post Info Map controller
                 let mapController = self.storyboard!.instantiateViewController(withIdentifier: "postInfoMap") as! PostInfoMapViewController
                 
